@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-
 /**
  * @author fengyu
  * @version 1.0
@@ -24,9 +22,6 @@ public class PaymentController {
 
     @Value("${server.port}")
     private String serverPost;
-
-    @Resource
-    private DiscoveryClient discoveryClient;
 
     @PostMapping(value = "/payment/create")
     public CommonResult create(@RequestBody Payment payment){
@@ -48,19 +43,6 @@ public class PaymentController {
         }else {
             return new CommonResult(500,"查询失败" + serverPost, null);
         }
-    }
-
-    @GetMapping(value = '/payment/discovery')
-    public Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        if(String element : services){
-            log.info("****element" + element);
-        }
-        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-        if(ServiceInstance instance : instances){
-            log.info("****instance" + instance);
-        }
-        return this.discoveryClient;
     }
 
 }

@@ -22,18 +22,18 @@ import javax.websocket.server.PathParam;
 @Slf4j
 public class PaymentController {
 
-    private static final String PAYMENT_URL = "http://localhost:8001/payment";
+    private static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
 
     @Autowired
     private RestTemplate restTemplate;
 
     @GetMapping("/consumer/payment/create")
     public CommonResult<Payment> create(Payment payment){
-        return restTemplate.postForObject(PAYMENT_URL + "/create",payment,CommonResult.class);
+        return restTemplate.postForObject(PAYMENT_URL + "/payment/create",payment,CommonResult.class);
     }
 
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id")int id){
-        return restTemplate.getForObject(PAYMENT_URL + "/get/" + id,CommonResult.class);
+        return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id,CommonResult.class);
     }
 }
