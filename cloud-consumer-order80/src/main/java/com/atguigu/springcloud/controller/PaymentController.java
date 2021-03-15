@@ -22,7 +22,7 @@ import javax.websocket.server.PathParam;
 @Slf4j
 public class PaymentController {
 
-    private static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
+    private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-SERVICE";
 
     @Autowired
     private RestTemplate restTemplate;
