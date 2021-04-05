@@ -27,7 +27,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @Value("${server.port}")
-    private String serverPost;
+    private String serverPort;
 
     @Resource
     private DiscoveryClient discoveryClient;
@@ -37,9 +37,9 @@ public class PaymentController {
         int result = paymentService.create(payment);
         log.info("插入结果" + result);
         if(result > 0){
-            return new CommonResult(200,"插入成功" + serverPost, result);
+            return new CommonResult(200,"插入成功" + serverPort, result);
         }else {
-            return new CommonResult(500,"插入失败" + serverPost, null);
+            return new CommonResult(500,"插入失败" + serverPort, null);
         }
     }
 
@@ -48,9 +48,9 @@ public class PaymentController {
         Payment payment = paymentService.getPaymentById(id);
         log.info("查询" + payment);
         if(payment != null){
-            return new CommonResult(200,"查询成功" + serverPost, payment);
+            return new CommonResult(200,"查询成功" + serverPort, payment);
         }else {
-            return new CommonResult(500,"查询失败" + serverPost, null);
+            return new CommonResult(500,"查询失败" + serverPort, null);
         }
     }
 
@@ -65,6 +65,11 @@ public class PaymentController {
             log.info("****instance" + instance);
         }
         return this.discoveryClient;
+    }
+
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLB(){
+        return serverPort;
     }
 
 }
