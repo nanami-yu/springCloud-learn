@@ -16,6 +16,7 @@ spring:
           search-paths:
             - spring-cloud-config
           default-label: main
+          force-pull: true
 eureka:
   client:
     register-with-eureka: true
