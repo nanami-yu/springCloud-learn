@@ -10,17 +10,31 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/nanami-yu/spring-cloud-config.git
-          username:
-          password:
+          uri: http://nanami-yu@114.116.225.80:10101/r/~nanami-yu/spring-cloud-config.git
+          username: nanami-yu
+          password: 123456
           search-paths:
             - spring-cloud-config
-          default-label: main
+          default-label: master
           force-pull: true
+  rabbitmq:
+    host: 167.179.88.93
+    port: 15673
+    username: admin
+    password: admin
+
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+
+# 暴露刷新
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
 
