@@ -82,4 +82,10 @@ public class PaymentController {
         }
         return serverPort;
     }
+
+    @GetMapping(value = "/payment/zipkin")
+    public String zipkin(){
+        return "zipkin";
+    }
+
 }

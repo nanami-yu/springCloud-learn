@@ -4,7 +4,11 @@ server:
 spring:
   application:
     name: cloud-order-service
-
+  zipkin:
+    base-url: http://167.179.88.93:9411
+  sleuth:
+    sampler:
+      probability: 1 # 采样率0~1 1表示全部采集
 eureka:
   client:
     register-with-eureka: true
