@@ -1,0 +1,37 @@
+server:
+  port: 8803
+
+spring:
+  application:
+    name: cloud-stream-consumer
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 167.179.88.93
+                port: 15673
+                username: admin
+                password: admin
+                virtual-host: /
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+          binder: defaultRabbit
+          group: nanami
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: stream8803
+    prefer-ip-address: true # 显示ip地址
+    lease-renewal-interval-in-seconds: 1 #发送心跳间隔
+    lease-expiration-duration-in-seconds: 2 # 等待时间
